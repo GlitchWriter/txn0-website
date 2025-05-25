@@ -1,8 +1,9 @@
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
+const querystring = require('querystring');
 
 exports.handler = async function(event, context) {
-    const data = JSON.parse(event.body);
+    const data = querystring.parse(event.body);
     const recaptchaToken = data['g-recaptcha-response'];
 
     const secretKey = process.env.RECAPTCHA_SECRET;
