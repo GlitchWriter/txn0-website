@@ -4,7 +4,7 @@ const querystring = require('querystring');
 exports.handler = async function(event, context) {
     try {
         // Parse incoming form data (URL-encoded)
-        const data = querystring.parse(event.body);
+        const data = JSON.parse(event.body);
         const recaptchaToken = data['g-recaptcha-response'];
 
         // Validate reCAPTCHA (using native fetch, no import needed)
