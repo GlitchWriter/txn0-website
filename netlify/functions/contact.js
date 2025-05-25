@@ -7,7 +7,7 @@ exports.handler = async function(event, context) {
         const data = querystring.parse(event.body);
         const recaptchaToken = data['g-recaptcha-response'];
 
-        // Validate reCAPTCHA
+        // Validate reCAPTCHA (using native fetch, no import needed)
         const secretKey = process.env.RECAPTCHA_SECRET;
         const recaptchaVerifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
