@@ -114,5 +114,14 @@ By using this contact form, you understand that we collect the name and email yo
     </section>
   </div>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    var captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+        e.preventDefault();
+        alert('Please complete the CAPTCHA checkbox before submitting.');
+    }
+});
+</script>
 </body>
 </html>
