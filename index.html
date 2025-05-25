@@ -83,37 +83,39 @@
 
     <!-- We will add DEXTools/GeckoTerminal embeds here AFTER the token goes live and the pair exists. For now, it's hidden. -->
 
-    <section id="contact" style="max-width: 600px; margin: 2rem auto; padding: 1rem; background: #111; border: 1px solid #444; border-radius: 10px; color: #fff;">
-      <h2 style="text-align: center;">Contact Us</h2>
-      <form action="https://formsubmit.co/support@txn0.io" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="New message from TXN-0 site">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;">
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;">
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;"></textarea>
-        <div class="g-recaptcha" data-sitekey="6Ld0UkgrAAAAAEw7UIc4S1ViRwlclHYRilX_GqaT"></div>
-        <button type="submit" style="padding: 0.7rem; background: #0ff; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
-          Send Message
-        </button>
-      </form>
-      <p style="font-size: 0.8em; color: gray; margin-top: 10px;">
-By using this contact form, you understand that we collect the name and email you provide solely for the purpose of responding to your message. We do not store, sell, or share your data beyond this direct communication.
-</p>
+   <section id="contact" style="max-width: 600px; margin: 2rem auto; padding: 1rem; background: #111; border: 1px solid #444; border-radius: 10px; color: #fff;">
+  <h2 style="text-align: center;">Contact Us</h2>
+  <form action="/.netlify/functions/contact" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;">
 
-    </section>
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;">
 
-    <section id="disclaimer" style="margin-top:20px;">
-      <h2>Disclaimer</h2>
-      <p>TXN-0 ($TXNF) is a decentralized experimental token deployed on the Binance Smart Chain. It is not a financial instrument, security, investment vehicle, or offer of any kind. There is no team, no guarantees, and no underlying company.</p>
-      <p>All content on this website is provided for informational and entertainment purposes only. The creators of TXN-0 do not provide financial advice, do not solicit investment, and assume no responsibility for the decisions of any individual interacting with this token or related assets.</p>
-      <p>Cryptocurrencies involve substantial risk, including the complete loss of value. You are solely responsible for any action taken based on your interpretation of this project. Participation in TXN-0 is entirely at your own risk.</p>
-      <p><em>Nothing here is real. Nothing here is fake. The glitch is yours to believe — or not.</em></p>
-    </section>
-  </div>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="5" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;"></textarea>
+
+    <div class="g-recaptcha" data-sitekey="6Ld0UkgrAAAAAEw7UIc4S1ViRwlclHYRilX_GqaT"></div>
+
+    <button type="submit" style="padding: 0.7rem; background: #0ff; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+      Send Message
+    </button>
+  </form>
+
+  <p style="font-size: 0.8em; color: gray; margin-top: 10px;">
+    By using this contact form, you understand that we collect the name and email you provide solely for the purpose of responding to your message. We do not store, sell, or share your data beyond this direct communication.
+  </p>
+</section>
+
+<section id="disclaimer" style="margin-top:20px;">
+  <h2>Disclaimer</h2>
+  <p>TXN-0 ($TXNF) is a decentralized experimental token deployed on the Binance Smart Chain. It is not a financial instrument, security, investment vehicle, or offer of any kind. There is no team, no guarantees, and no underlying company.</p>
+  <p>All content on this website is provided for informational and entertainment purposes only. The creators of TXN-0 do not provide financial advice, do not solicit investment, and assume no responsibility for the decisions of any individual interacting with this token or related assets.</p>
+  <p>Cryptocurrencies involve substantial risk, including the complete loss of value. You are solely responsible for any action taken based on your interpretation of this project. Participation in TXN-0 is entirely at your own risk.</p>
+  <p><em>Nothing here is real. Nothing here is fake. The glitch is yours to believe — or not.</em></p>
+</section>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
     var captchaResponse = grecaptcha.getResponse();
