@@ -83,9 +83,9 @@
 
     <!-- We will add DEXTools/GeckoTerminal embeds here AFTER the token goes live and the pair exists. For now, it's hidden. -->
 
-   <section id="contact" style="max-width: 600px; margin: 2rem auto; padding: 1rem; background: #111; border: 1px solid #444; border-radius: 10px; color: #fff;">
+  <section id="contact" style="max-width: 600px; margin: 2rem auto; padding: 1rem; background: #111; border: 1px solid #444; border-radius: 10px; color: #fff;">
   <h2 style="text-align: center;">Contact Us</h2>
-  <form action="/.netlify/functions/contact" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+  <form style="display: flex; flex-direction: column; gap: 1rem;">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required style="padding: 0.5rem; background: #222; color: #fff; border: 1px solid #333; border-radius: 5px;">
 
@@ -116,12 +116,38 @@
 </section>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script>
-document.querySelector('form').addEventListener('submit', function(e) {
-    var captchaResponse = grecaptcha.getResponse();
+document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const captchaResponse = grecaptcha.getResponse();
     if (!captchaResponse) {
-        e.preventDefault();
         alert('Please complete the CAPTCHA checkbox before submitting.');
+        return;
+    }
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    try {
+        const response = await fetch('/.netlify/functions/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name,
+                email,
+                message,
+                'g-recaptcha-response': captchaResponse
+            })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    } catch (error) {
+        console.error(error);
+        alert('An error occurred. Please try again.');
     }
 });
 </script>
