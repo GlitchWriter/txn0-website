@@ -20,41 +20,60 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1 style="font-size: 2.4rem; font-weight: bold; letter-spacing: 1.5px; color: #fff;">
-  TXN-0
-</h1>
-<p style="font-size: 1rem; font-style: italic; color: gray; margin-top: -0.5rem;">
-  The transaction that never happened.
-</p>
-<p style="font-size: 0.95rem; color: #0af; margin-top: 0.5rem;">
-  First buyers lock in the glitch. Will you?
-</p>
+<header>
+  <h1 style="font-size: 2.4rem; font-weight: bold; letter-spacing: 1.5px; color: #fff;">
+    TXN-0
+  </h1>
+  <p style="font-size: 1rem; font-style: italic; color: gray; margin-top: -0.5rem;">
+    The transaction that never happened.
+  </p>
+  <p style="font-size: 0.95rem; color: #0af; margin-top: 0.5rem;">
+    First buyers lock in the glitch. Will you?
+  </p>
 
-      <style>
-  .btn-row { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
-  .btn-row .button { min-width:180px; text-align:center; }
-  @media (max-width:520px) {
-    .btn-row { flex-direction:column; align-items:stretch; }
-    .btn-row .button { width:100%; }
-  }
-</style>
+  <style>
+    .btn-row { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
+    .btn-row .button{
+      display:inline-block; min-width:180px; text-align:center;
+      padding:12px 16px; min-height:44px; line-height:1.1;
+    }
+    @media (max-width:520px){
+      .btn-row { flex-direction:column; align-items:stretch; }
+      .btn-row .button { width:100%; }
+    }
+    .proof-strip{
+      text-align:center; margin:8px 0 0; opacity:.95; font-size:.95rem;
+    }
+    .proof-strip a{ color:#0af; text-decoration:none }
+    .proof-strip a:hover{ text-decoration:underline }
+    html{ scroll-behavior:smooth; } /* enables smooth jump to sections */
+  </style>
 
-<div class="btn-row">
-  <a href="https://pancakeswap.finance/swap?outputCurrency=0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1"
-     class="button" aria-label="Buy TXN-0 on PancakeSwap">Buy on PancakeSwap</a>
+  <div class="btn-row">
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1"
+       class="button" aria-label="Buy TXN-0 on PancakeSwap">Buy on PancakeSwap</a>
 
-  <a href="https://www.dextools.io/token/txn0"
-     class="button" target="_blank" rel="noopener"
-     aria-label="View TXN-0 on DEXTools">View on DEXTools</a>
-</div>
+    <a href="https://www.dextools.io/token/txn0"
+       class="button" target="_blank" rel="noopener"
+       aria-label="View TXN-0 on DEXTools">View on DEXTools</a>
 
-<p style="text-align:center; margin-top:10px;">
-  Token is unlocked and glitch is on-chain.
-</p>
+    <!-- NEW: Ledger button -->
+    <a href="/ledger-of-trust.html"
+       class="button"
+       aria-label="View TXN-0 Ledger of Trust">Ledger of Trust</a>
+  </div>
 
+  <!-- NEW: proof strip right under the buttons -->
+  <p class="proof-strip">
+    🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321047" target="_blank" rel="noopener">LP lock</a> ·
+    🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321033" target="_blank" rel="noopener">Owner lock</a> ·
+    📜 <a href="https://bscscan.com/token/0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1" target="_blank" rel="noopener">Contract (BscScan)</a>
+  </p>
 
-    </header>
+  <p style="text-align:center; margin-top:10px;">
+    Token is unlocked and glitch is on-chain.
+  </p>
+</header>
 
     <section id="about">
       <h2 style="color: #00ffcc;">About TXN-0</h2>
