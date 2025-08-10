@@ -7,7 +7,10 @@
   <title>TXN-0</title>
   <meta name="description" content="TXN-0 — The transaction that never happened. A stealth-born token on Binance Smart Chain, flipping crypto loss into a digital glitch artifact.">
   <meta name="keywords" content="TXN-0, TXNF, Binance Smart Chain, stealth token, crypto loss, meme coin">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-39XBQEZZTL"></script>
 <script>
@@ -21,7 +24,7 @@
 <body>
   <div class="container">
 <header>
-  <h1 style="font-size: 2.4rem; font-weight: bold; letter-spacing: 1.5px; color: #fff;">
+  <h1 style="font-size: 2.4rem; font-weight: bold; letter-spacing: .8px; color: #fff; font-family: 'Sora', ui-sans-serif, system-ui;">
     TXN-0
   </h1>
   <p style="font-size: 1rem; font-style: italic; color: gray; margin-top: -0.5rem;">
@@ -32,48 +35,67 @@
   </p>
 
   <style>
-    .btn-row { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
+    html{scroll-behavior:smooth}
+    .btn-row{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:.6rem}
     .btn-row .button{
-      display:inline-block; min-width:180px; text-align:center;
-      padding:12px 16px; min-height:44px; line-height:1.1;
+      display:inline-block;min-width:180px;text-align:center;
+      padding:14px 18px;min-height:46px;border-radius:12px;
+      background:#10bfb0;color:#061218;text-decoration:none;
+      font-family:'Sora', ui-sans-serif, system-ui;font-weight:700;font-size:1rem;letter-spacing:.2px;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+      border:1px solid rgba(16,191,176,.35);
+      box-shadow:0 6px 18px rgba(0,0,0,.25), inset 0 -1px 0 rgba(255,255,255,.08);
+      transition:transform .08s ease, box-shadow .15s ease, background .15s ease;
     }
-    @media (max-width:520px){
-      .btn-row { flex-direction:column; align-items:stretch; }
-      .btn-row .button { width:100%; }
-    }
-    .proof-strip{
-      text-align:center; margin:8px 0 0; opacity:.95; font-size:.95rem;
-    }
-    .proof-strip a{ color:#0af; text-decoration:none }
-    .proof-strip a:hover{ text-decoration:underline }
-    html{ scroll-behavior:smooth; } /* enables smooth jump to sections */
+    .btn-row .button:hover{background:#12cebf;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+    .btn-row .button:active{transform:translateY(1px)}
+    @media (max-width:520px){.btn-row{flex-direction:column;align-items:stretch}.btn-row .button{width:100%}}
+    .proof-strip{text-align:center;margin:8px 0 0;opacity:.95;font-size:.95rem}
+    .proof-strip a{color:#0af;text-decoration:none}.proof-strip a:hover{text-decoration:underline}
   </style>
+<style>
+  @media (max-width:480px){
+    #ledger iframe { height: 65vh !important; min-height: 420px; }
+  }
+</style>
 
   <div class="btn-row">
     <a href="https://pancakeswap.finance/swap?outputCurrency=0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1"
        class="button" aria-label="Buy TXN-0 on PancakeSwap">Buy on PancakeSwap</a>
 
-    <a href="https://www.dextools.io/token/txn0"
-       class="button" target="_blank" rel="noopener"
-       aria-label="View TXN-0 on DEXTools">View on DEXTools</a>
+    <a href="https://www.dextools.io/app/en/token/txn0" class="button" target="_blank" rel="noopener">
+  View on DEXTools
+</a>
 
-    <!-- NEW: Ledger button -->
-    <a href="/ledger-of-trust.html"
-       class="button"
-       aria-label="View TXN-0 Ledger of Trust">Ledger of Trust</a>
+
+    <!-- Ledger button jumps to the live section below -->
+    <a href="#ledger" class="button" aria-label="View TXN-0 Ledger of Trust">Ledger of Trust</a>
   </div>
 
-  <!-- NEW: proof strip right under the buttons -->
+  <!-- Proof strip (update LP/Owner links later, or keep as-is) -->
   <p class="proof-strip">
-    🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321047" target="_blank" rel="noopener">LP lock</a> ·
-    🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321033" target="_blank" rel="noopener">Owner lock</a> ·
-    📜 <a href="https://bscscan.com/token/0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1" target="_blank" rel="noopener">Contract (BscScan)</a>
-  </p>
+  🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321047" target="_blank" rel="noopener">LP lock</a> ·
+  🔒 <a href="https://www.pinksale.finance/pinklock/bsc/record/1321033" target="_blank" rel="noopener">Owner lock</a> ·
+  📜 <a href="https://bscscan.com/token/0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1" target="_blank" rel="noopener">Contract (BscScan)</a>
+</p>
 
   <p style="text-align:center; margin-top:10px;">
     Token is unlocked and glitch is on-chain.
   </p>
 </header>
+
+<!-- LIVE Ledger section (appears when the button is clicked) -->
+<section id="ledger" style="padding:28px 0;">
+  <h2 style="text-align:center;margin:0 0 16px;letter-spacing:.3px;font-family:'Sora', ui-sans-serif;">Ledger of Trust (Live)</h2>
+  <div style="max-width:1100px;margin:0 auto;border:1px solid #222;border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.15);">
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRy9lPvt0swL79y3VDN4lktURUGRNxjscINnN91fQZ2McqfgXTieoKNEtr50hIo6WWKxYOAupLayMz4/pubhtml?gid=1180565177&single=true&widget=true&headers=false"
+      width="100%" height="720" style="border:0; overflow:hidden;" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade" title="Ledger of Trust"
+    ></iframe>
+  </div>
+</section>
+
 
     <section id="about">
       <h2 style="color: #00ffcc;">About TXN-0</h2>
