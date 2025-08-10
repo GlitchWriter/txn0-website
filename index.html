@@ -68,9 +68,10 @@
 </a>
 
 
-    <!-- Ledger button jumps to the live section below -->
-    <a href="#ledger" class="button" aria-label="View TXN-0 Ledger of Trust">Ledger of Trust</a>
-  </div>
+    <!-- Ledger button now goes to Genesis Vault (opens new tab) -->
+<a href="https://bscscan.com/address/0x3Ea9493D1d9F90e22693596671C3E02b001D0E8c"
+   class="button" target="_blank" rel="noopener"
+   aria-label="Open TXN-0 Genesis Vault on BscScan">Ledger of Trust</a>
 
   <!-- Proof strip (update LP/Owner links later, or keep as-is) -->
   <p class="proof-strip">
@@ -83,35 +84,6 @@
     Token is unlocked and glitch is on-chain.
   </p>
 </header>
-
-<!-- LIVE Ledger section (appears when the button is clicked) -->
-<section id="ledger" style="padding:28px 0;">
-  <h2 style="text-align:center;margin:0 0 16px;letter-spacing:.3px;font-family:'Sora', ui-sans-serif;">
-    Ledger of Trust (Live)
-  </h2>
-
-  <div style="max-width:1100px;margin:0 auto;border:1px solid #222;border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.15);">
-   <iframe
-  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRy9lPvt0swL79y3VDN4lktURUGRNxjscINnN91fQZ2McqfgXTieoKNEtr50hIo6WWKxYOAupLayMz4/pubhtml?gid=1180565177&single=true&headers=false&chrome=false"
-  style="border:0; width:100%; height:clamp(420px,60vh,640px);"
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  title="Ledger of Trust"
-></iframe>
-
-  </div>
-
-  <p style="text-align:center;margin-top:8px;">
-    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRy9lPvt0swL79y3VDN4lktURUGRNxjscINnN91fQZ2McqfgXTieoKNEtr50hIo6WWKxYOAupLayMz4/pubhtml?gid=1180565177&single=true&chrome=false"
-       target="_blank" rel="noopener">Open full ledger ↗</a>
-  </p>
-</section>
-
-<style>
-  @media (max-width:480px){
-    #ledger iframe { height:65vh !important; min-height:420px; }
-  }
-</style>
 
 
     <section id="about">
