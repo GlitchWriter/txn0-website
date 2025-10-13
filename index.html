@@ -211,6 +211,38 @@ Liquidity and owner locks are public, visible, and final — no tricks.
 </p>
 
     </section>
+    <!-- ✅ INSERT DEXSCREENER CHART HERE -->
+<section id="chart" style="margin-top: 40px;">
+  <h2 style="text-align:center;color:#00ffcc;font-family:'Sora',sans-serif;margin-bottom:20px;">
+    Live Chart — TXN‑0
+  </h2>
+  <div style="max-width: 1000px; margin: 0 auto; border: 1px solid #0ff; border-radius: 12px; overflow: hidden;">
+    <style>
+      #dexscreener-embed {
+        position: relative;
+        width: 100%;
+        padding-bottom: 125%;
+      }
+      @media(min-width: 1400px) {
+        #dexscreener-embed {
+          padding-bottom: 65%;
+        }
+      }
+      #dexscreener-embed iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border: 0;
+      }
+    </style>
+    <div id="dexscreener-embed">
+      <iframe src="https://dexscreener.com/bsc/0x954a382056D1168034345c7f13a99690a5AAEB9A?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+    </div>
+  </div>
+</section>
+<!-- ✅ END CHART SECTION -->
 <section id="listings-tech" style="background:#111; color:#fff; padding:20px; border: 1px solid #0ff; border-radius:10px; max-width:900px; margin:30px auto; font-family:sans-serif; display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between;">
 
   <!-- Listings -->
