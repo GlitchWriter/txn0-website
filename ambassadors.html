@@ -23,6 +23,7 @@
       min-height:100vh;
       overflow-x:hidden;
     }
+
     header{
       display:flex;align-items:center;justify-content:space-between;
       padding:20px 40px;
@@ -34,19 +35,18 @@
       text-decoration:none;color:var(--text);
       font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.5px;
     }
-    .brand img {
-  height: 38px;
-  width: auto;
-  filter: drop-shadow(0 0 6px rgba(0,255,224,0.5));
-  transition: filter 0.25s ease;
-}
-.brand img:hover {
-  filter: drop-shadow(0 0 14px rgba(0,255,224,0.9)) saturate(140%);
-}
+    .brand img{
+      height:38px;width:auto;
+      filter:drop-shadow(0 0 6px rgba(0,255,224,0.5));
+      transition:filter .25s ease;
+    }
+    .brand img:hover{
+      filter:drop-shadow(0 0 14px rgba(0,255,224,0.9)) saturate(140%);
+    }
 
     main{
       display:flex;flex-direction:column;align-items:center;text-align:center;
-      padding:60px 20px 100px;max-width:950px;margin:0 auto;
+      padding:60px 20px 100px;max-width:950px;margin:0 auto;position:relative;z-index:1;
     }
     h1{
       font-family:'Orbitron',sans-serif;
@@ -62,8 +62,7 @@
       background:rgba(255,255,255,0.03);
       border:1px solid rgba(255,255,255,0.1);
       border-radius:18px;
-      padding:28px;
-      margin-bottom:30px;
+      padding:28px;margin-bottom:30px;
       box-shadow:0 10px 40px rgba(0,0,0,0.5);
       text-align:left;
       transition:transform .2s ease,box-shadow .3s ease;
@@ -71,158 +70,212 @@
     .card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(0,255,224,0.08)}
     .card h2{color:var(--teal);font-family:'Orbitron',sans-serif;margin-bottom:10px;font-size:1.25rem}
     .card p{color:var(--muted);line-height:1.6}
-    .cta{
-      display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px;
-    }
-    a.btn{
-      text-decoration:none;padding:14px 24px;border-radius:12px;
-      font-weight:600;letter-spacing:.4px;
-      transition:all .2s ease;
-    }
+    .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:40px}
+    a.btn{text-decoration:none;padding:14px 24px;border-radius:12px;font-weight:600;letter-spacing:.4px;transition:all .2s ease}
     .primary{
       color:#000;background:linear-gradient(90deg,var(--teal),#6effe6);
       box-shadow:0 0 15px rgba(0,255,224,0.4);
     }
     .primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(0,255,224,0.6)}
-    .ghost{
-      color:var(--text);border:1px solid rgba(255,255,255,0.2);
-    }
+    .ghost{color:var(--text);border:1px solid rgba(255,255,255,0.2)}
     .ghost:hover{border-color:var(--red);color:var(--red)}
-    footer{
-      text-align:center;padding:40px 10px;color:var(--muted);font-size:.95rem;
-    }
-    .links{margin-top:10px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;}
-    .links a{
-      color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.2);
-    }
+    footer{text-align:center;padding:40px 10px;color:var(--muted);font-size:.95rem}
+    .links{margin-top:10px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+    .links a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.2)}
     .links a:hover{color:var(--teal);border-color:var(--teal)}
-/* ===== TXN-0 premium background (no canvas, no rainbow) ===== */
 
-/* content above effects */
-header, main, footer { position: relative; z-index: 2; }
+    /* Starfield background */
+    canvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      pointer-events:none;
+    }
 
-/* A: ultra-subtle scanlines (CRT vibe, not distracting) */
-body::after{
-  content:"";
-  position:fixed; inset:0; z-index:1; pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.022) 0px,
-      rgba(255,255,255,0.022) 1px,
-      transparent 2px,
-      transparent 3px
-    );
-  mix-blend-mode: soft-light;
-  opacity:.45;
-  animation: linesDrift 22s linear infinite;
-}
+    /* keep content above background */
+    header,main,footer{position:relative;z-index:1}
 
-/* B: focused teal halo behind the hero (no color wash) */
-main::before{
-  content:"";
-  position:absolute; left:50%; transform:translateX(-50%);
-  top: 40px; width: 1100px; height: 520px;
-  background: radial-gradient(closest-side, rgba(0,255,224,0.22), rgba(0,255,224,0) 62%);
-  filter: blur(26px);
-  opacity:.55;
-  z-index:1; pointer-events:none;
-  animation: breathe 12s ease-in-out infinite alternate;
-}
-
-/* C: thin horizontal sheen sweeping slowly (adds life) */
-main::after{
-  content:"";
-  position: absolute; left:0; right:0; top: 120px; height: 140px;
-  background: linear-gradient(180deg, rgba(0,255,224,0.06), rgba(0,255,224,0));
-  opacity:.28; filter: blur(18px);
-  animation: sweep 16s ease-in-out infinite;
-  pointer-events:none; z-index:1;
-}
-
-/* animations */
-@keyframes linesDrift { 0%{background-position:0 0} 100%{background-position:0 -140px} }
-@keyframes breathe { 0%{opacity:.45; transform:translateX(-50%) scale(1.0)} 100%{opacity:.62; transform:translateX(-50%) scale(1.05)} }
-@keyframes sweep {
-  0%   { transform: translateY(0); opacity:.20 }
-  50%  { transform: translateY(18px); opacity:.32 }
-  100% { transform: translateY(0); opacity:.20 }
-}
-/* Button polish for Return to Main Site */
-.ghost.btn{
-  color:var(--text);
-  border:1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(8px);
-  transition: all .3s ease;
-}
-.ghost.btn:hover{
-  border-color: rgba(0,255,224,0.5);
-  box-shadow: 0 0 16px rgba(0,255,224,0.25);
-  color: var(--teal);
-}
-
-
-
-
+    /* Button polish for Return to Main Site */
+    .ghost.btn{
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.03);
+      backdrop-filter:blur(8px);
+      transition:all .3s ease;
+    }
+    .ghost.btn:hover{
+      border-color:rgba(0,255,224,0.5);
+      box-shadow:0 0 16px rgba(0,255,224,0.25);
+      color:var(--teal);
+    }
   </style>
 </head>
+
 <body>
+  <!-- Starfield Background -->
+  <canvas></canvas>
 
+  <header>
+    <a class="brand" href="/">
+      <img src="txn0-logo-64x64.png" alt="TXN-0 Logo" />
+      TXN-0
+    </a>
+    <a class="ghost btn" href="/">Return to Main Site</a>
+  </header>
 
-<header>
-  <a class="brand" href="/">
-    <img src="txn0-logo-64x64.png" alt="TXN-0 Logo" />
-    TXN-0
-  </a>
-  <a class="ghost btn" href="/">Return to Main Site</a>
-</header>
-
-<main>
-  <h1>TXN-0 Ambassador Network</h1>
-  <p class="lede">
-    <em>A signal call for those who survived the glitch.</em><br><br>
-    This isn’t about marketing. It’s about transmission.  
-    The TXN-0 Ambassador Network is a unified class of early believers who carry the glitch forward through story, creation, and connection.
-  </p>
-
-  <div class="card">
-  <h2>What You’ll Gain</h2>
-  <p>
-    Ambassadors are the signal carriers of TXN-0 — the first to shape its voice and reach.  
-    As part of the network, you’ll gain access to private updates, early creative drops, and  
-    symbolic recognition within the TXN-0 ecosystem as it grows.  
-    Your effort will help define how TXN-0 moves through the world — and those who stay consistent  
-    will always be remembered as the originals.
-  </p>
-</div>
-
-
-  <div class="card">
-    <h2>How It Works</h2>
-    <p>
-      We’re on a mission to build a transparent, innovative, and community-driven crypto ecosystem — and we want passionate people like you to help us spread the word.
-      Fill out the form carefully. If selected, you’ll receive exclusive access, recognition, and an opportunity to grow alongside the TXN-0 team.
+  <main>
+    <h1>TXN-0 Ambassador Network</h1>
+    <p class="lede">
+      <em>A signal call for those who survived the glitch.</em><br><br>
+      This isn’t about marketing. It’s about transmission.<br>
+      The TXN-0 Ambassador Network is a unified class of early believers who carry the glitch forward through story, creation, and connection.
     </p>
-  </div>
 
-  <div class="cta">
-    <a class="btn primary" href="https://forms.gle/qK6XzER9pKm7eyPf8" target="_blank" rel="noopener">Join the Network</a>
-    <a class="btn ghost" href="https://x.com/_TXN0" target="_blank" rel="noopener">Follow on X</a>
-  </div>
-</main>
+    <div class="card">
+      <h2>What You’ll Gain</h2>
+      <p>
+        Ambassadors are the signal carriers of TXN-0 — the first to shape its voice and reach.  
+        As part of the network, you’ll gain access to private updates, early creative drops, and  
+        symbolic recognition within the TXN-0 ecosystem as it grows.  
+        Your effort will help define how TXN-0 moves through the world — and those who stay consistent  
+        will always be remembered as the originals.
+      </p>
+    </div>
 
-<footer>
-  <p>Explore the TXN-0 Signal</p>
-  <div class="links">
-    <a href="https://www.dextools.io/app/en/token/txn0" target="_blank">DEXTools</a>
-    <a href="https://dexscreener.com/bsc/0x954a382056D1168034345c7f13a99690a5AAEB9A" target="_blank">DexScreener</a>
-    <a href="https://bscscan.com/token/0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1" target="_blank">BscScan</a>
-    <a href="https://forms.gle/qK6XzER9pKm7eyPf8" target="_blank">Ambassador Form</a>
-  </div>
-  <p style="margin-top:10px;">© TXN-0 2025 — The Transaction That Never Happened</p>
-</footer>
+    <div class="card">
+      <h2>How It Works</h2>
+      <p>
+        We’re on a mission to build a transparent, innovative, and community-driven crypto ecosystem — and we want passionate people like you to help us spread the word.
+        Fill out the form carefully. If selected, you’ll receive exclusive access, recognition, and an opportunity to grow alongside the TXN-0 team.
+      </p>
+    </div>
 
+    <div class="cta">
+      <a class="btn primary" href="https://forms.gle/qK6XzER9pKm7eyPf8" target="_blank" rel="noopener">Join the Network</a>
+      <a class="btn ghost" href="https://x.com/_TXN0" target="_blank" rel="noopener">Follow on X</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Explore the TXN-0 Signal</p>
+    <div class="links">
+      <a href="https://www.dextools.io/app/en/token/txn0" target="_blank">DEXTools</a>
+      <a href="https://dexscreener.com/bsc/0x954a382056D1168034345c7f13a99690a5AAEB9A" target="_blank">DexScreener</a>
+      <a href="https://bscscan.com/token/0xcb81CB9F47C70f88A6EebD007e31f9c27b3bd9b1" target="_blank">BscScan</a>
+      <a href="https://forms.gle/qK6XzER9pKm7eyPf8" target="_blank">Ambassador Form</a>
+    </div>
+    <p style="margin-top:10px;">© TXN-0 2025 — The Transaction That Never Happened</p>
+  </footer>
+
+  <!-- Starfield JS -->
+  <script>
+  const STAR_COLOR = '#00ffee';
+  const STAR_SIZE = 3;
+  const STAR_MIN_SCALE = 0.2;
+  const OVERFLOW_THRESHOLD = 50;
+  const STAR_COUNT = (window.innerWidth + window.innerHeight) / 8;
+
+  const canvas = document.querySelector('canvas'),
+        context = canvas.getContext('2d');
+
+  let scale = 1, width, height;
+  let stars = [];
+  let pointerX, pointerY;
+  let velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+  let touchInput = false;
+
+  generate(); resize(); step();
+
+  window.onresize = resize;
+  canvas.onmousemove = onMouseMove;
+  canvas.ontouchmove = onTouchMove;
+  canvas.ontouchend = onMouseLeave;
+  document.onmouseleave = onMouseLeave;
+
+  function generate() {
+    for (let i = 0; i < STAR_COUNT; i++)
+      stars.push({ x: 0, y: 0, z: STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE) });
+  }
+
+  function placeStar(star) { star.x = Math.random() * width; star.y = Math.random() * height; }
+
+  function recycleStar(star) {
+    let direction = 'z';
+    let vx = Math.abs(velocity.x), vy = Math.abs(velocity.y);
+    if (vx > 1 || vy > 1) {
+      let axis = vx > vy ? (Math.random() < vx/(vx+vy) ? 'h' : 'v')
+                         : (Math.random() < vy/(vx+vy) ? 'v' : 'h');
+      direction = axis === 'h' ? (velocity.x > 0 ? 'l' : 'r')
+                               : (velocity.y > 0 ? 't' : 'b');
+    }
+    star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
+    if (direction === 'z') { star.z = 0.1; star.x = Math.random() * width; star.y = Math.random() * height; }
+    else if (direction === 'l') { star.x = -OVERFLOW_THRESHOLD; star.y = height * Math.random(); }
+    else if (direction === 'r') { star.x = width + OVERFLOW_THRESHOLD; star.y = height * Math.random(); }
+    else if (direction === 't') { star.x = width * Math.random(); star.y = -OVERFLOW_THRESHOLD; }
+    else if (direction === 'b') { star.x = width * Math.random(); star.y = height + OVERFLOW_THRESHOLD; }
+  }
+
+  function resize() {
+    scale = window.devicePixelRatio || 1;
+    width = window.innerWidth * scale;
+    height = window.innerHeight * scale;
+    canvas.width = width;
+    canvas.height = height;
+    stars.forEach(placeStar);
+  }
+
+  function step() {
+    context.clearRect(0, 0, width, height);
+    update(); render();
+    requestAnimationFrame(step);
+  }
+
+  function update() {
+    velocity.tx *= 0.96; velocity.ty *= 0.96;
+    velocity.x += (velocity.tx - velocity.x) * 0.8;
+    velocity.y += (velocity.ty - velocity.y) * 0.8;
+    stars.forEach(star => {
+      star.x += velocity.x * star.z;
+      star.y += velocity.y * star.z;
+      star.x += (star.x - width/2) * velocity.z * star.z;
+      star.y += (star.y - height/2) * velocity.z * star.z;
+      star.z += velocity.z;
+      if (star.x < -OVERFLOW_THRESHOLD || star.x > width + OVERFLOW_THRESHOLD ||
+          star.y < -OVERFLOW_THRESHOLD || star.y > height + OVERFLOW_THRESHOLD) recycleStar(star);
+    });
+  }
+
+  function render() {
+    stars.forEach(star => {
+      context.beginPath();
+      context.lineCap = 'round';
+      context.lineWidth = STAR_SIZE * star.z * scale;
+      context.globalAlpha = 0.5 + 0.5*Math.random();
+      context.strokeStyle = STAR_COLOR;
+      context.moveTo(star.x, star.y);
+      let tailX = velocity.x * 2, tailY = velocity.y * 2;
+      if (Math.abs(tailX) < 0.1) tailX = 0.5;
+      if (Math.abs(tailY) < 0.1) tailY = 0.5;
+      context.lineTo(star.x + tailX, star.y + tailY);
+      context.stroke();
+    });
+  }
+
+  function movePointer(x, y) {
+    if (typeof pointerX === 'number' && typeof pointerY === 'number') {
+      let ox = x - pointerX, oy = y - pointerY;
+      velocity.tx += (ox / 8 * scale) * (touchInput ? 1 : -1);
+      velocity.ty += (oy / 8 * scale) * (touchInput ? 1 : -1);
+    }
+    pointerX = x; pointerY = y;
+  }
+
+  function onMouseMove(e){ touchInput=false; movePointer(e.clientX,e.clientY); }
+  function onTouchMove(e){ touchInput=true; movePointer(e.touches[0].clientX,e.touches[0].clientY); e.preventDefault(); }
+  function onMouseLeave(){ pointerX=null; pointerY=null; }
+  </script>
 </body>
 </html>
-
