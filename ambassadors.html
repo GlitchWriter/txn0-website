@@ -96,50 +96,71 @@
       color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.2);
     }
     .links a:hover{color:var(--teal);border-color:var(--teal)}
-/* ===== TXN-0 Cinematic Animated Background (visible behind content) ===== */
+/* ===== TXN-0 subtle full-screen GLITCH background (no grid, no text distortion) ===== */
 
-/* put content above the animated layers */
+/* keep content above the animated layers */
 body { position: relative; background: var(--bg); }
 header, main, footer { position: relative; z-index: 1; }
 
-/* animated layers sit between body bg and content */
+/* two lightweight layers that create a living-screen vibe */
 body::before,
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 0;            /* <- now above body bg, below content */
+  z-index: 0;              /* sits under content, above body bg */
   pointer-events: none;
-  background-size: 200% 200%;
 }
 
-/* Grid mesh layer (slow drift) */
+/* Layer 1: scanlines + micro noise flicker */
 body::before {
   background:
-    repeating-linear-gradient(0deg, rgba(0,255,224,0.06) 0, transparent 2px, transparent 42px),
-    repeating-linear-gradient(90deg, rgba(255,0,60,0.06) 0, transparent 2px, transparent 42px);
-  opacity: .6;
-  animation: gridShift 28s linear infinite;
+    /* scanlines */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 2px,
+      transparent 3px
+    ),
+    /* very soft teal/red ambient wash */
+    radial-gradient(1000px 600px at 30% 25%, rgba(0,255,224,0.08), transparent 60%),
+    radial-gradient(1000px 600px at 70% 75%, rgba(255,0,60,0.06), transparent 60%);
+  mix-blend-mode: soft-light;
+  animation:
+    scanScroll 18s linear infinite,
+    flicker 4.2s steps(60) infinite;
+  opacity: .75; /* raise to 0.9 if you want stronger lines */
 }
 
-/* Energy pulse layer (soft teal/red glow breathing) */
+/* Layer 2: subtle “signal bars” sweep (very low alpha) */
 body::after {
   background:
-    radial-gradient(circle at 30% 30%, rgba(0,255,224,0.10) 0%, transparent 58%),
-    radial-gradient(circle at 72% 68%, rgba(255,0,60,0.10) 0%, transparent 58%);
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 18px,
+      rgba(0,255,224,0.035) 19px,
+      transparent 24px
+    ),
+    linear-gradient(135deg, rgba(0,255,224,0.05), rgba(255,0,60,0.04));
   mix-blend-mode: overlay;
-  opacity: .9;
-  animation: pulseFlow 14s ease-in-out infinite alternate;
+  animation: sweep 12s ease-in-out infinite alternate;
+  opacity: .55; /* tune between .35 and .7 */
 }
 
-@keyframes gridShift {
-  0%   { background-position: 0 0, 0 0; }
-  100% { background-position: 220px 420px, -220px -420px; }
+/* Animations */
+@keyframes scanScroll {
+  0%   { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 -160px, 0 0, 0 0; }
 }
-
-@keyframes pulseFlow {
-  0%   { background-position: 0% 50%, 100% 50%; transform: translate3d(0,0,0); }
-  100% { background-position: 100% 50%, 0% 50%;  transform: translate3d(0,0,0); }
+@keyframes flicker {
+  0%,19%,21%,23%,25%,100% { opacity: .75; }
+  20%,22%,24% { opacity: .68; } /* tiny “glitch” dim dips */
+}
+@keyframes sweep {
+  0%   { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 0% -220px, 100% 100%; }
 }
 
 
