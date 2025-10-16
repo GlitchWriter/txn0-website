@@ -109,6 +109,18 @@
       section{ margin-top: 40px; }
       .btn-row{ gap: .6rem; }
     }
+    /* === Fix: make all .button text bright & crisp === */
+.button,
+.button:visited {
+  color: #eaffff !important;                /* readable on dark backgrounds */
+  text-shadow: 0 0 6px rgba(0,255,204,.28); /* subtle glow for clarity */
+  font-weight: 700 !important;
+}
+.button:hover,
+.button:focus {
+  color: #ffffff !important;
+}
+
   </style>
 
   <!-- Google tag (gtag.js) -->
