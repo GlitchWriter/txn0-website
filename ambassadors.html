@@ -96,46 +96,52 @@
       color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.2);
     }
     .links a:hover{color:var(--teal);border-color:var(--teal)}
-    /* ===== TXN-0 Cinematic Animated Background ===== */
+/* ===== TXN-0 Cinematic Animated Background (visible behind content) ===== */
+
+/* put content above the animated layers */
+body { position: relative; background: var(--bg); }
+header, main, footer { position: relative; z-index: 1; }
+
+/* animated layers sit between body bg and content */
 body::before,
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
-  background: var(--bg);
-  background-size: 200% 200%;
+  z-index: 0;            /* <- now above body bg, below content */
   pointer-events: none;
+  background-size: 200% 200%;
 }
 
-/* Grid layer */
+/* Grid mesh layer (slow drift) */
 body::before {
   background:
-    repeating-linear-gradient(0deg, rgba(0,255,224,0.05) 0, transparent 2px, transparent 40px),
-    repeating-linear-gradient(90deg, rgba(255,0,60,0.05) 0, transparent 2px, transparent 40px),
-    var(--bg);
-  animation: gridShift 25s linear infinite;
+    repeating-linear-gradient(0deg, rgba(0,255,224,0.06) 0, transparent 2px, transparent 42px),
+    repeating-linear-gradient(90deg, rgba(255,0,60,0.06) 0, transparent 2px, transparent 42px);
+  opacity: .6;
+  animation: gridShift 28s linear infinite;
 }
 
-/* Pulse layer */
+/* Energy pulse layer (soft teal/red glow breathing) */
 body::after {
   background:
-    radial-gradient(circle at 30% 30%, rgba(0,255,224,0.08) 0%, transparent 60%),
-    radial-gradient(circle at 70% 70%, rgba(255,0,60,0.08) 0%, transparent 60%),
-    var(--bg);
+    radial-gradient(circle at 30% 30%, rgba(0,255,224,0.10) 0%, transparent 58%),
+    radial-gradient(circle at 72% 68%, rgba(255,0,60,0.10) 0%, transparent 58%);
   mix-blend-mode: overlay;
+  opacity: .9;
   animation: pulseFlow 14s ease-in-out infinite alternate;
 }
 
 @keyframes gridShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 200px 400px; }
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 220px 420px, -220px -420px; }
 }
 
 @keyframes pulseFlow {
-  0% { background-position: 0% 50%; opacity: 0.8; }
-  100% { background-position: 100% 50%; opacity: 1; }
+  0%   { background-position: 0% 50%, 100% 50%; transform: translate3d(0,0,0); }
+  100% { background-position: 100% 50%, 0% 50%;  transform: translate3d(0,0,0); }
 }
+
 
   </style>
 </head>
