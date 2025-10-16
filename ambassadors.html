@@ -96,66 +96,57 @@
       color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.2);
     }
     .links a:hover{color:var(--teal);border-color:var(--teal)}
-/* ===== TXN-0 cinematic glitch background ===== */
+/* ===== TXN-0 Cinematic Background (real movement) ===== */
 
-body { position: relative; background: #000; overflow-x: hidden; }
-header, main, footer { position: relative; z-index: 1; }
+/* content sits above the background */
+body { background:#050508; position:relative; overflow-x:hidden; }
+header, main, footer { position:relative; z-index:2; }
 
-/* Base flicker + horizontal noise bars */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+/* fixed canvas sits behind everything */
+#bg-canvas {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.65;              /* dial 0.5–0.85 */
+  filter: saturate(115%) contrast(105%);
+}
+
+/* faint scanlines for “screen” feel (very subtle) */
+#screen-lines {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
   background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 2px, transparent 3px),
-    linear-gradient(90deg, rgba(0,255,224,0.05), rgba(255,0,60,0.05));
-  animation:
-    flicker 3.5s steps(60) infinite,
-    barShift 6s linear infinite;
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.028) 0px,
+      rgba(255,255,255,0.028) 1px,
+      transparent 2px,
+      transparent 3px
+    );
   mix-blend-mode: soft-light;
-  opacity: 0.9;
-  pointer-events: none;
+  opacity: .6;                /* dial .4–.8 */
+  animation: linesDrift 18s linear infinite;
 }
 
-/* random horizontal scan bar flicker */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(0,255,224,0.07) 0px,
-    rgba(0,255,224,0.07) 2px,
-    transparent 3px,
-    transparent 6px
-  );
-  opacity: 0.4;
-  animation: scanShift 12s linear infinite;
-  pointer-events: none;
+/* halo glow behind hero title (cinematic focal light) */
+main::before{
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  top: 80px; width: 1200px; height: 600px;
+  background: radial-gradient(closest-side, rgba(0,255,224,0.28), rgba(0,255,224,0) 60%);
+  filter: blur(24px);
+  opacity:.65; z-index:1; pointer-events:none;
+  animation: breathe 10s ease-in-out infinite alternate;
 }
 
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 100% { opacity: 0.9; }
-  20%, 22%, 24% { opacity: 0.75; }
-}
-
-@keyframes barShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 300px; }
-}
-
-@keyframes scanShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 -600px; }
-}
+/* tasteful motion */
+@keyframes linesDrift { 0% {background-position:0 0;} 100% {background-position:0 -160px;} }
+@keyframes breathe { 0% {opacity:.55; transform:translateX(-50%) scale(1.0);} 100% {opacity:.75; transform:translateX(-50%) scale(1.06);} }
 
 
 
   </style>
 </head>
 <body>
+<canvas id="bg-canvas"></canvas>
+<div id="screen-lines"></div>
 
 <header>
   <a class="brand" href="/">
@@ -209,6 +200,43 @@ body::after {
   </div>
   <p style="margin-top:10px;">© TXN-0 2025 — The Transaction That Never Happened</p>
 </footer>
+  <!-- Cinematic background animation -->
+  <script>
+    (function(){
+      const c = document.getElementById('bg-canvas');
+      const ctx = c.getContext('2d');
+      let w, h, t = 0;
+      function resize(){
+        w = c.width = window.innerWidth;
+        h = c.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
 
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        ctx.globalCompositeOperation='lighter';
+        const cx = w/2, cy = h/2;
+        for(let i=0;i<40;i++){
+          const ang = (i/40)*Math.PI*2 + t*0.15;
+          const r = 250 + Math.sin(t*0.05+i)*90;
+          const x = cx + Math.cos(ang)*r;
+          const y = cy + Math.sin(ang)*r*0.6;
+          const hue = (180 + i*5 + t*3)%360;
+          const grad = ctx.createRadialGradient(x,y,0,x,y,260);
+          grad.addColorStop(0,`hsla(${hue},100%,60%,0.12)`);
+          grad.addColorStop(1,`hsla(${hue},100%,50%,0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(x,y,250,0,Math.PI*2);
+          ctx.fill();
+        }
+        t += 0.6;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 </body>
 </html>
+
